@@ -1,23 +1,28 @@
 param(
     [Parameter(Mandatory=$false)]
-    [string]$TargetFolder = (Get-Location).Path
+    [string]$YourName = $env:USERNAME
 )
 
 $SourceDir = Split-Path -Parent $PSScriptRoot
-Write-Host "Installing Utel USA x Aria AI Security Standard into: $TargetFolder" -ForegroundColor Cyan
+$AgentsContent = (Get-Content "$SourceDir\AGENTS.md" -Raw).Replace("[Your name here]", $YourName)
+$ClaudeContent = Get-Content "$SourceDir\CLAUDE.md" -Raw
 
-if (-not (Test-Path $TargetFolder)) {
-    New-Item -ItemType Directory -Path $TargetFolder -Force | Out-Null
+$Targets = @(
+    @{ Name = "Google Antigravity"; Dir = "$env:USERPROFILE\.gemini"; Files = @("AGENTS.md") },
+    @{ Name = "OpenAI Codex";       Dir = "$env:USERPROFILE\.codex";  Files = @("AGENTS.md") },
+    @{ Name = "Claude Code";        Dir = "$env:USERPROFILE\.claude"; Files = @("AGENTS.md", "CLAUDE.md") }
+)
+
+foreach ($t in $Targets) {
+    if (-not (Test-Path $t.Dir)) {
+        New-Item -ItemType Directory -Path $t.Dir -Force | Out-Null
+    }
+    Set-Content -Path (Join-Path $t.Dir "AGENTS.md") -Value $AgentsContent -Encoding UTF8
+    if ($t.Files -contains "CLAUDE.md") {
+        Set-Content -Path (Join-Path $t.Dir "CLAUDE.md") -Value $ClaudeContent -Encoding UTF8
+    }
+    Write-Host "[OK] Installed persistent guardrails for $($t.Name) in $($t.Dir)" -ForegroundColor Green
 }
 
-Copy-Item "$SourceDir\AGENTS.md" -Destination "$TargetFolder\AGENTS.md" -Force
-Copy-Item "$SourceDir\CLAUDE.md" -Destination "$TargetFolder\CLAUDE.md" -Force
-Copy-Item "$SourceDir\SECURITY_STANDARD.md" -Destination "$TargetFolder\SECURITY_STANDARD.md" -Force
-Copy-Item "$SourceDir\.cursorrules" -Destination "$TargetFolder\.cursorrules" -Force
-
-if (-not (Test-Path "$TargetFolder\.gitignore")) {
-    Copy-Item "$SourceDir\.gitignore" -Destination "$TargetFolder\.gitignore" -Force
-}
-
-Write-Host "[OK] Installed AGENTS.md, CLAUDE.md, SECURITY_STANDARD.md, and .cursorrules!" -ForegroundColor Green
-Write-Host "Ready for Google Antigravity, Claude Code, OpenAI Codex, and Cursor." -ForegroundColor Yellow
+Write-Host "`nDone! Personalized for: $YourName" -ForegroundColor Cyan
+Write-Host "Verify by opening your AI tool and asking: 'What persistent instructions are you following?'" -ForegroundColor Yellow
