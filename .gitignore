@@ -1,0 +1,28 @@
+# Environment & Secrets (RED TIER - NEVER COMMIT)
+.env
+.env.*
+*.pem
+*.key
+*.pfx
+*.p12
+*credentials*.json
+*token*.json
+*secret*
+
+# Customer Bills, CPNI, & Raw Quotes (Keep local, never push to public Git)
+customer-bills/
+invoices/
+cpni/
+quotes-raw/
+*.pdf
+*.xlsx
+*.xls
+*.csv
+
+# OS & Editor Noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+__pycache__/
+node_modules/
