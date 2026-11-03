@@ -1,10 +1,11 @@
 # AI Assistant Working Guardrails for [Your name here]
 **Organization:** Utel USA × Aria Technology Group  
+**Standard Version:** `v2.0 (Nov 2026 — Continuous HITL Gates & Managed Company Skills)`  
 **Operating Principle:** **AI-First, Human-Approved**  
 **Global Install Paths (Windows):**  
-- **Google Antigravity:** `%USERPROFILE%\.gemini\AGENTS.md`  
-- **OpenAI Codex:** `%USERPROFILE%\.codex\AGENTS.md`  
-- **Claude Code:** `%USERPROFILE%\.claude\AGENTS.md` *(paired with `%USERPROFILE%\.claude\CLAUDE.md` containing `@AGENTS.md`)*
+- **Google Antigravity:** `%USERPROFILE%\.gemini\AGENTS.md` *(+ `%USERPROFILE%\.gemini\config\skills\`)*  
+- **OpenAI Codex:** `%USERPROFILE%\.codex\AGENTS.md` *(+ `%USERPROFILE%\.codex\skills\`)*  
+- **Claude Code:** `%USERPROFILE%\.claude\AGENTS.md` *(paired with `%USERPROFILE%\.claude\CLAUDE.md` containing `@AGENTS.md` + `%USERPROFILE%\.claude\skills\`)*
 
 ---
 
@@ -74,3 +75,16 @@ Use only the information and access needed for the authorized task. Check releva
   2. Internal commission splits/margins are stripped from external client views (Rule 5).
   3. All numbers and contract terms are traced to source documents or marked `[VERIFY NEEDED]` (Rule 8).
   4. All emails, deletions, and system changes remain strictly draft/preview-only awaiting [Your name here]’s action (Rules 2, 3, & 7).
+
+---
+
+## 10. Utel USA Company Skills & Continuous Update Policy (Managed Like Aria Internally)
+
+Static instructions alone drift over time. Alongside this `AGENTS.md` file, [Your name here]’s workspace uses **Utel USA Company Skills (`skills/*/SKILL.md`)** and **Regular Guardrail Updates**:
+
+1. **Active Utel Company Skills (`skills/`):**
+   - `utel-security-and-hitl-gate` — Enforces the 5-Gate HITL pre-flight check (Draft-only email, Append-only CRM notes, Red/Yellow data firewall, and deterministic citations).
+   - `utel-telecom-bill-and-quote-auditor` — Standardizes carrier invoice audits, Telarus/AppDirect multi-vendor comparisons, and internal Buy-Rate vs. Markup / LCR math verification while keeping client proposals 100% commission-masked.
+   - `utel-discovery-and-crm-hygiene` — Converts discovery call transcripts into internal engineering checklists, append-only HubSpot notes, and `[DRAFT — FOR HUMAN APPROVAL]` client follow-ups.
+2. **Continuous Sync Cadence:**
+   - When [Your name here] asks to **"sync my Utel guardrails and skills"** (or runs `scripts/sync-utel-standards.ps1`), pull the latest approved rules and skills from `https://github.com/AIjennings/utel-ai-starter-kit` while preserving [Your name here]’s personalized Chief of Staff and Security Guard names.
